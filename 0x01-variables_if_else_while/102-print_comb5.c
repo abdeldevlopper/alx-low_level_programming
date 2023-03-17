@@ -1,23 +1,33 @@
 #include <stdio.h>
+
 /**
- * main - program that prints numbers from 0 to 99.
- * Return: 0
+ * main - Prints all possible combinations of two two-digit numbers
+ * Return: Always 0 (Success)
  */
 
 int main(void)
 {
-int c = 0;
-while (c <= 99)
-{
-putchar(c / 10 + '0');
-putchar(c % 10 + '0');
-if (c != 99)
-{
-putchar(','); 
-putchar(' ');
-}
-c++;
-}
-putchar('\n');
-return (0);
+    int i, j;
+
+    for (i = 0; i <= 98; i++)
+    {
+        for (j = i + 1; j <= 99; j++)
+        {
+            putchar((i / 10) + '0');
+            putchar((i % 10) + '0');
+            putchar(' ');
+            putchar((j / 10) + '0');
+            putchar((j % 10) + '0');
+
+            if (i < 98 || j < 99)
+            {
+                putchar(',');
+                putchar(' ');
+            }
+        }
+    }
+
+    putchar('\n');
+
+    return (0);
 }
