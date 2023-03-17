@@ -1,25 +1,32 @@
 #include <stdio.h>
+
 /**
- * main - program that prints numbers from 0 to 99.
- * Return: 0
+ * main - main function
+ *
+ * Return: always 0
  */
 
 int main(void)
 {
-int c = 0;
-while (c <= 99)
-{
-putchar(c / 10 + '0');
-putchar(c % 10 + '0');
-if (c != 99)
-{
-putchar(','); 
-putchar(' ');
-}
-c++;
-}
-putchar('\n');
-return (0);
-}
+        int i;
+        init j;
 
-
+        for (i = 0 ; i < 10 ; i++)
+        {
+                for (j = 1 ; j < 10 ; j++)
+                {
+                        if (i < j && i != j)
+                        {
+                                putchar(i + '0');
+                                putchar(j + '0');
+                                if (i + j != 17)
+                                {
+                                        putchar(',');
+                                        putchar(' ');
+                                }
+                        }
+                }
+        }
+        putchar('\n');
+        return (0);
+}
