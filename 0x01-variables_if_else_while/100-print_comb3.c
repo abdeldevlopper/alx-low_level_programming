@@ -1,24 +1,25 @@
 #include <stdio.h>
 /**
- * main - Entry point
- *
- * Return: Always 0 (Success)
+ * main - program that prints numbers from 0 to 99.
+ * Return: 0
  */
+
 int main(void)
 {
-int i, j;
-for (i = 0; i < 9; i++) 
+int c = 0;
+while (c <= 99)
 {
-for (j = i + 1 ; j <= 9 ; j++)
+putchar(c / 10 + '0');
+putchar(c % 10 + '0');
+if (c != 99)
 {
-putchar(i + '0');
-putchar(j + '0');
-if (i != 8 || j != 9)
-{
-putchar(',');
+putchar(','); 
 putchar(' ');
 }
+c++;
 }
-}
+putchar('\n');
 return (0);
 }
+
+
