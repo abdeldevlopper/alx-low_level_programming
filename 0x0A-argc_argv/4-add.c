@@ -3,44 +3,34 @@
 
 /**
  * main - Entry point
- *
- * Description: prints the sum of arguments if they are numbers.
- *
- * @argc: the number of arguments.
- * @argv: the array of arguments.
- *
- * Return: always 0.
+ * Description: adds positive numbers
+ * @argc: number of arguments passed
+ * @argv: array of pointers to the arguments
+ * Return: 0 if successful, 1 if an error occurs
  */
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int i, sum = 0;
+	int i, j, sum = 0;
 
-	/* check if arguments are provided */
-	if (argc < 2)
+	if (argc < 2) /* check if arguments are provided */
 	{
-		printf("Error\n");
-		return (1);
+		printf("0\n");
+		return (0);
 	}
 
-	/* process the arguments */
-	for (i = 1; i < argc; i++)
+	for (i = 1; i < argc; i++) /* iterate through each argument */
 	{
-		/* check if argument is a number */
-		char *endptr;
-		long int num = strtol(argv[i], &endptr, 10);
-
-		if (*endptr != '\0')
+		for (j = 0; argv[i][j]; j++) /* check if each character is a digit */
 		{
-			printf("Error\n");
-			return (1);
+			if (argv[i][j] < '0' || argv[i][j] > '9')
+			{
+				printf("Error\n");
+				return (1);
+			}
 		}
-
-		/* add number to sum */
-		sum += num;
+		sum += atoi(argv[i]); /* add the number to the sum */
 	}
 
-	/* print the sum */
-	printf("%d\n", sum);
-
+	printf("%d\n", sum); /* print the sum */
 	return (0);
 }
