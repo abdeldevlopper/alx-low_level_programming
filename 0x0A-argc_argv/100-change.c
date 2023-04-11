@@ -2,66 +2,93 @@
 #include <stdlib.h>
 
 /**
- * main - Entry point
- *
- * Description: Prints the minimum number of coins to make change
- * for an amount of money.
- *
- * @argc: The number of arguments
- * @argv: An array of arguments
- *
- * Return: 0 if successful, 1 otherwise
+ * str_len - calculate the length of a string
+ * @s: the string
+ * Return: return the length
  */
+
+int str_len(char *s)
+{
+    int i;
+
+    i = 0;
+    while (s[i])
+        i++;
+    return (i);
+}
+
+/**
+ * _atoi - converts a string to int
+ * @s: the string to convert
+ * Return: return the value of the string converted
+ */
+
+int _atoi(char *s)
+{
+    int result;
+    int sign;
+    int i;
+    int len;
+
+    i = 0;
+    len = str_len(s);
+    sign = 1;
+    result = 0;
+    while (s[i] < '0' || s[i] > '9')
+    {
+        if (s[i] == '-')
+            sign *= -1;
+        i++;
+    }
+    if (len > i)
+    {
+        while (s[i] >= '0' && s[i] <= '9')
+        {
+            result = result * 10 + (s[i] - '0');
+            i++;
+        }
+    }
+    return (result * sign);
+}
+
+/**
+ * main - Entry point
+ * Description: prints the number of arguments.
+ * @argc: the number of arguments.
+ * @argv: the array of arguments.
+ * Return: always 0.
+ */
+
 int main(int argc, char *argv[])
 {
-	int cents, coins = 0;
+    int n;
+    int i;
+    int times;
+    int coins[] = {25, 10, 5, 2, 1};
 
-	/* Check the number of arguments */
-	if (argc != 2)
-	{
-		printf("Error\n");
-		return (1);
-	}
+    i = 0;
+    times = 0;
+    if (argc != 2)
+    {
+        printf("Error\n");
+        return (1);
+    }
 
-	/* Convert the argument to an integer */
-	cents = atoi(argv[1]);
-
-	/* Check if the number is negative */
-	if (cents < 0)
-	{
-		printf("0\n");
-		return (0);
-	}
-
-	/* Calculate the number of coins */
-	while (cents >= 25)
-	{
-		cents -= 25;
-		coins++;
-	}
-	while (cents >= 10)
-	{
-		cents -= 10;
-		coins++;
-	}
-	while (cents >= 5)
-	{
-		cents -= 5;
-		coins++;
-	}
-	while (cents >= 2)
-	{
-		cents -= 2;
-		coins++;
-	}
-	while (cents >= 1)
-	{
-		cents -= 1;
-		coins++;
-	}
-
-	/* Print the number of coins */
-	printf("%d\n", coins);
-
-	return (0);
+    n = _atoi(argv[1]);
+    if (n < 0)
+    {
+        printf("0\n");
+        return (0);
+    }
+    while (n > 0)
+    {
+        while (n >= coins[i])
+        {
+            n -= coins[i];
+            times++;
+        }
+        i++;
+    }
+    printf("%d\n", times);
+    return (0);
 }
