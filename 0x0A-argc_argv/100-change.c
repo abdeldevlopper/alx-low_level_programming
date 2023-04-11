@@ -1,107 +1,69 @@
-#include "main.h"
 #include <stdio.h>
-
-/**
- * str_len - calculate the length of a string
- * @s: the string
- * Return: return the length
- */
-
-int str_len(char *s)
-{
-	int i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-/**
- * _atoi - converts a string to int
- * @s: the string to convert
- * Return: return the value of the string converted
- */
-
-int _atoi(char *s)
-{
-	int result;
-	int sign;
-	int i;
-	int len;
-
-	i = 0;
-	len = str_len(s);
-	sign = 1;
-	result = 0;
-	while (s[i] < '0' || s[i] > '9')
-	{
-		if (s[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	if (len > i)
-	{
-		if (sign == -1)
-		{
-			while (s[i] >= '0' && s[i] <= '9')
-			{
-				result *= 10;
-				result -= s[i] - 48;
-				i++;
-			}
-		}
-		else
-		{
-			while (s[i] >= '0' && s[i] <= '9')
-			{
-				result *= 10;
-				result += s[i] - 48;
-				i++;
-			}
-		}
-	}
-	return (result);
-}
+#include <stdlib.h>
 
 /**
  * main - Entry point
- * Description: prints the number of arguments.
- * @argc: the number of arguments.
- * @argv: the array of arguments.
- * Return: always 0.
+ *
+ * Description: prints the minimum number of coins to make change for an amount of money.
+ *
+ * @argc: the number of arguments passed to the program
+ * @argv: an array containing the arguments passed to the program
+ *
+ * Return: 0 on success, 1 on error
  */
-
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-	int n;
-	int i;
-	int times;
-	int coins[] = {25, 10, 5, 2, 1};
+    int cents, coins = 0;
 
-	i = 0;
-	times = 0;
-	if (argc != 2)
-	{
-		printf("Error\n");
-		return (1);
-	}
+    /* Check the number of arguments */
+    if (argc != 2)
+    {
+        printf("Error\n");
+        return 1;
+    }
 
-	if (_atoi(argv[1]) < 0)
-		printf("0\n");
-	else
-	{
-		n = _atoi(argv[1]);
-		while (n > 0)
-		{
-			while (n >= coins[i])
-			{
-				n -= coins[i];
-				times++;
-			}
-			i++;
-		}
-		printf("%d\n", times);
-	}
-	return (0);
+    /* Convert the argument to an integer */
+    cents = atoi(argv[1]);
+
+    /* Check if the input is negative */
+    if (cents < 0)
+    {
+        printf("0\n");
+        return 0;
+    }
+
+    /* Calculate the number of coins */
+    while (cents > 0)
+    {
+        if (cents >= 25)
+        {
+            coins++;
+            cents -= 25;
+        }
+        else if (cents >= 10)
+        {
+            coins++;
+            cents -= 10;
+        }
+        else if (cents >= 5)
+        {
+            coins++;
+            cents -= 5;
+        }
+        else if (cents >= 2)
+        {
+            coins++;
+            cents -= 2;
+        }
+        else
+        {
+            coins++;
+            cents -= 1;
+        }
+    }
+
+    /* Print the result */
+    printf("%d\n", coins);
+
+    return 0;
 }
