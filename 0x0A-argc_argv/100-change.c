@@ -1,5 +1,5 @@
+#include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
 
 /**
  * str_len - calculate the length of a string
@@ -9,12 +9,12 @@
 
 int str_len(char *s)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (s[i])
-        i++;
-    return (i);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
 /**
@@ -25,30 +25,43 @@ int str_len(char *s)
 
 int _atoi(char *s)
 {
-    int result;
-    int sign;
-    int i;
-    int len;
+	int result;
+	int sign;
+	int i;
+	int len;
 
-    i = 0;
-    len = str_len(s);
-    sign = 1;
-    result = 0;
-    while (s[i] < '0' || s[i] > '9')
-    {
-        if (s[i] == '-')
-            sign *= -1;
-        i++;
-    }
-    if (len > i)
-    {
-        while (s[i] >= '0' && s[i] <= '9')
-        {
-            result = result * 10 + (s[i] - '0');
-            i++;
-        }
-    }
-    return (result * sign);
+	i = 0;
+	len = str_len(s);
+	sign = 1;
+	result = 0;
+	while (s[i] < '0' || s[i] > '9')
+	{
+		if (s[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	if (len > i)
+	{
+		if (sign == -1)
+		{
+			while (s[i] >= '0' && s[i] <= '9')
+			{
+				result *= 10;
+				result -= s[i] - 48;
+				i++;
+			}
+		}
+		else
+		{
+			while (s[i] >= '0' && s[i] <= '9')
+			{
+				result *= 10;
+				result += s[i] - 48;
+				i++;
+			}
+		}
+	}
+	return (result);
 }
 
 /**
@@ -61,34 +74,34 @@ int _atoi(char *s)
 
 int main(int argc, char *argv[])
 {
-    int n;
-    int i;
-    int times;
-    int coins[] = {25, 10, 5, 2, 1};
+	int n;
+	int i;
+	int times;
+	int coins[] = {25, 10, 5, 2, 1};
 
-    i = 0;
-    times = 0;
-    if (argc != 2)
-    {
-        printf("Error\n");
-        return (1);
-    }
+	i = 0;
+	times = 0;
+	if (argc != 2)
+	{
+		printf("Error\n");
+		return (1);
+	}
 
-    n = _atoi(argv[1]);
-    if (n < 0)
-    {
-        printf("0\n");
-        return (0);
-    }
-    while (n > 0)
-    {
-        while (n >= coins[i])
-        {
-            n -= coins[i];
-            times++;
-        }
-        i++;
-    }
-    printf("%d\n", times);
-    return (0);
+	if (_atoi(argv[1]) < 0)
+		printf("0\n");
+	else
+	{
+		n = _atoi(argv[1]);
+		while (n > 0)
+		{
+			while (n >= coins[i])
+			{
+				n -= coins[i];
+				times++;
+			}
+			i++;
+		}
+		printf("%d\n", times);
+	}
+	return (0);
 }
