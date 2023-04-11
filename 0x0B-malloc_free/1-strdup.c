@@ -9,11 +9,11 @@
  */
 int _strlen(char *s)
 {
-    int i;
+int i;
 
-    for (i = 0; s[i]; i++)
-        ;
-    return (i);
+for (i = 0; s[i]; i++)
+;
+return (i);
 }
 
 /**
@@ -24,16 +24,16 @@ int _strlen(char *s)
  */
 char *_strdup(char *str)
 {
-    char *new_str;
-    int i;
+char *new_str;
+int i;
 
-    if (str == NULL)
-        return (NULL);
-    new_str = malloc(sizeof(char) * (_strlen(str) + 1));
-    if (!new_str)
-        return (NULL);
-    for (i = 0; str[i]; i++)
-        new_str[i] = str[i];
-    new_str[i] = '\0';
-    return (new_str);
+if (str == NULL)
+return (NULL);
+new_str = malloc(sizeof(char) * (_strlen(str) + 1));
+if (!new_str)
+return (NULL);
+for (i = 0; str[i]; i++)
+new_str[i] = str[i];
+new_str[i] = '\0';
+return (new_str);
 }
