@@ -4,6 +4,7 @@
 /**
  * _strlen - returns the length of a given string
  * @s: the string
+ *
  * Return: the length of given string
  */
 int _strlen(char *s)
@@ -18,6 +19,7 @@ int _strlen(char *s)
 /**
  * _strdup - duplicates a given string.
  * @str: the string to duplicate.
+ *
  * Return: the array created.
  */
 char *_strdup(char *str)
