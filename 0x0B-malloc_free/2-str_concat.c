@@ -1,24 +1,38 @@
+#include "main.h"
 #include <stdlib.h>
-#include <string.h>
 
 /**
- * _strlen - returns the length of a given string
- * @s: the string
- * Return: the length of given string
- *
- /*
-   
- char *str_concat(char *s1, char *s2)
+ * str_concat - concatenates two strings.
+ * @s1: the first string.
+ * @s2: the second string.
+ * Return: the concatenated string.
+ */
+char *str_concat(char *s1, char *s2)
 {
-size_t s1_len = s1 ? strlen(s1) : 0;
-size_t s2_len = s2 ? strlen(s2) : 0;
-char *result = malloc(s1_len + s2_len + 1);
+if (s1 == NULL)
+s1 = "";
+if (s2 == NULL)
+s2 = "";
 
-if (!result)
+int len1 = 0;
+while (s1[len1])
+len1++;
 
-if (s1)
-memcpy(result, s1, s1_len);
-if (s2)
+int len2 = 0;
+while (s2[len2])
+len2++;
 
-result[s1_len + s2_len] = '\0';
+char *str = malloc(sizeof(char) * (len1 + len2 + 1));
+if (str == NULL)
+return (NULL);
+
+for (int i = 0; i < len1; i++)
+str[i] = s1[i];
+
+for (int j = 0; j < len2; j++)
+str[len1 + j] = s2[j];
+
+str[len1 + len2] = '\0';
+
+return (str);
 }
