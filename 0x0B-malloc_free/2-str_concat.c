@@ -1,90 +1,88 @@
+#include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
 
 /**
+ * _strlen - returns the length of a given string
+ * @s: the string
+ * Return: the length of given string
+ */
 
-_strlen - Returns the length of a given string.
-
-@str: The string to measure the length of.
-
-Return: The length of the string.
-*/
-size_t _strlen(const char *str)
+int _strlen(char *s)
 {
-size_t length = 0;
+	int i;
 
-while (str[length] != '\0')
-{
-length++;
-}
-return length;
-}
-
-/**
-
-create_array - Creates an array of characters with the given size.
-
-@size: The size of the array to create.
-
-Return: A pointer to the newly created array or NULL if size is zero or if
-
-memory allocation fails.
-*/
-char *create_array(size_t size)
-{
-char *array = NULL;
-
-if (size == 0)
-{
-fprintf(stderr, "Error: Size must be greater than 0.\n");
-return NULL;
-}
-
-array = malloc(sizeof(char) * size);
-if (!array)
-{
-fprintf(stderr, "Error: Failed to allocate memory.\n");
-return NULL;
-}
-
-return array;
+	i = 0;
+	while (s[i])
+	{
+		i++;
+	}
+	return (i);
 }
 
 /**
+ * _create_array - creates an array of chars.
+ * @size: the size of the memory to allocate.
+ * Return: the array created.
+ */
 
-str_concat - Concatenates two strings.
-
-@str1: The first string to concatenate.
-
-@str2: The second string to concatenate.
-
-Return: A pointer to the concatenated string or NULL if memory allocation fails.
-*/
-char *str_concat(const char *str1, const char *str2)
+char *_create_array(unsigned int size)
 {
-char *result = NULL;
-size_t size1 = (str1 != NULL) ? _strlen(str1) : 0;
-size_t size2 = (str2 != NULL) ? _strlen(str2) : 0;
-size_t i, j;
+	char *array;
 
-result = create_array(size1 + size2 + 1);
-if (!result)
-{
-fprintf(stderr, "Error: Failed to allocate memory.\n");
-return NULL;
+	if (size == 0)
+		return (NULL);
+	array = malloc(sizeof(char) * size);
+	if (!array)
+		return (NULL);
+	return (array);
 }
 
-for (i = 0; i < size1; i++)
-{
-result[i] = str1[i];
-}
+/**
+ * str_concat - concatenates two string.
+ * @s1: the first string.
+ * @s2: the second string.
+ * Return: the concatenated string.
+ */
 
-for (j = 0; j < size2; j++)
+char *str_concat(char *s1, char *s2)
 {
-result[i] = str2[j];
-i++;
-}
+	char *str;
+	int size_s1;
+	int size_s2;
+	int i;
+	int j;
 
-result[i] = '\0';
-return result;
+	if (s1 && s2)
+	{
+		size_s1 = _strlen(s1);
+		size_s2 = _strlen(s2);
+	}
+	else if (s1 == NULL && s2 == NULL)
+	{
+		size_s1 = 0;
+		size_s2 = 0;
+	}
+	else if (s1 == NULL)
+	{
+		size_s1 = 0;
+		size_s2 = _strlen(s2);
+	}
+	else if (s2 == NULL)
+	{
+		size_s2 = 0;
+		size_s1 = _strlen(s1);
+	}
+	str = _create_array(size_s1 + size_s2 + 1);
+	if (!str)
+		return (NULL);
+	for (i = 0; i < size_s1; i++)
+		str[i] = s1[i];
+	for (j = 0; j < size_s2; j++)
+	{
+		str[i] = s2[j];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
 }
