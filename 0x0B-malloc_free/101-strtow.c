@@ -1,7 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include <ctype.h>
 
 /**
  * _strlen - returns the length of a given string
@@ -51,12 +50,12 @@ char *_strncpy(char *dest, char *src, int n)
 }
 
 /**
- * is_space - checks if character is space
+ * isspace - checks if character is space
  * @c: the char
  * Return: the integer value of char
  */
 
-int is_space(int c)
+int isspace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' ||
 			c == '\v' || c == '\f' || c == '\r');
@@ -75,10 +74,10 @@ int count_words(char *str)
 
 	while (str[i] != '\0')
 	{
-		if (!is_space(str[i]))
+		if (str[i] != ' ')
 		{
 			count++;
-			while (!is_space(str[i]) && str[i] != '\0')
+			while (str[i] != ' ' && str[i] != '\0')
 				i++;
 		}
 		else
@@ -115,7 +114,7 @@ char **strtow(char *str)
 	while (str[i] != '\0' && j < num_words)
 	{
 		start = i;
-		while (!is_space(str[i]) && str[i] != '\0')
+		while (str[i] != ' ' && str[i] != '\0')
 			i++;
 		end = i;
 		word_length = end - start;
@@ -123,9 +122,15 @@ char **strtow(char *str)
 		{
 			word = malloc(sizeof(char) * (word_length + 1));
 			if (word == NULL)
-			{
-				for (int k = 0; k < j; k++)
-					free(words[k]);
-				free(words);
 				return (NULL);
-			}
+			_strncpy(word, str + start, word_length);
+			word[word_length] = '\0';
+			words[j] = word;
+			j++;
+		}
+		else
+			i++;
+	}
+	words[j] = NULL;
+	return (words);
+}
