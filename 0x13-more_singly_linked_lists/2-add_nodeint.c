@@ -3,23 +3,26 @@
 
 /**
  * add_nodeint - Adds a new node at the beginning of a listint_t list.
- * @head: A pointer to a pointer to the first node of the listint_t list.
- * @n: The value to be assigned to the n field of the new node.
+ * @head: A pointer to a pointer to the first node of the list.
+ * @n: The integer value to store in the new node.
  *
- * Return: The address of the new element, or NULL if it failed.
+ * Return: If memory allocation fails, or head is NULL, returns NULL.
+ *         Otherwise, returns the address of the new node.
  */
-
 listint_t *add_nodeint(listint_t **head, const int n)
 {
-    listint_t *new_node;
+	listint_t *new_node;
 
-    new_node = malloc(sizeof(listint_t));
-    if (new_node == NULL)
-        return (NULL);
+	if (head == NULL)
+		return (NULL);
 
-    new_node->n = n;
-    new_node->next = *head;
-    *head = new_node;
+	new_node = malloc(sizeof(*new_node));
+	if (new_node == NULL)
+		return (NULL);
 
-    return (new_node);
+	new_node->n = n;
+	new_node->next = *head;
+	*head = new_node;
+
+	return (new_node);
 }
